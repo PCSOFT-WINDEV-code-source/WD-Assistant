@@ -1,0 +1,266 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cAssistant
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x116a497d065e1ac6
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAA9dyhie9WPgmV2A1wo05YvLac2AJ77L1/dPCdqTJGJEdcaCNytVuVt9nVzigi228RN+FiYhr5jt0MSmcqbtVExOIyVwLztddflj/sxeT8LlzZ85eTFoN/eFZ3WwSLGdl18pJgGwWXziU5ggdo=
+     code : |1-
+      cAssistant est une classe
+      	m_nPlanActif est un entier		 				// Numéro du plan encours (entre 1 et 20)
+      	m_tabPlan est un tableau statique de 50 entiers		// Tableau contenant l'enchainement des plans "précédents"
+      	m_nIndPlanPrecedent est un entier					// Indice du plan précédent dans le tableau
+      
+      	// Gestion des procédures et des champs appelables dans la fenêtre associée
+      	m_FenetreAssociée	est un champ
+      	m_BoutonPrécédent	est un champ
+      	m_BoutonSuivant		est un Champ
+      	m_ProcédureInitialisation	est une procédure
+      	m_ProcédureFinalisation		est une procédure
+      	m_ProcédureContrôle		est une procédure
+      	m_ProcédureAction		est une procédure
+      	m_ProcédureSuivant		est une procédure
+      	
+      Fin
+     type : 131072
+   -
+     code : |1-
+      
+     type : 131074
+  procedures :
+   -
+     name : Constructeur
+     internal_properties : CAAAAAgAAAD985N3rmP3lSbGGBr6f6jxZaK3AfUcANTJm18pwM7UvLwjFc96Iyz/yzjNCtDsYGlY2ojxPfreYeZAjJA9oxy3ur/tgDd5cVkdP6izrw1sV8agO4nS4AQHeHaWRO2+1DkkGqymzwz3XxTarX9Eeebvp8J2jGO0tXyC+ujbzaarDs5rnUyFwSIxpp2otpLYlKho7A==
+     procedure_id : 1254896247502740166
+     type_code : 27
+     code : |1+
+      Procédure Constructeur(FenêtreAssistant est un champ, NomBoutonPrécédent est un champ, NomBoutonSuivant est un champ,...
+      							 ProcédureInit est une procédure, ProcédureFin est une procédure, ...
+      							 ContrôlePlan est une procédure, ActionPlan est une procédure, DétermineSuivant est une procédure)
+      
+      :m_nIndPlanPrecedent=0 			// pas de plan précédent dans le tableau d'enchainement
+      
+      // Mémorisation des paramètres
+      m_FenetreAssociée <- FenêtreAssistant
+      m_BoutonPrécédent <- NomBoutonPrécédent
+      m_BoutonSuivant	<- NomBoutonSuivant
+      m_ProcédureInitialisation = ProcédureInit
+      m_ProcédureFinalisation	= ProcédureFin
+      m_ProcédureContrôle	= ContrôlePlan
+      m_ProcédureAction = ActionPlan
+      m_ProcédureSuivant = DétermineSuivant
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1254896247502805702
+     type_code : 28
+     code : |1+
+      Procédure Destructeur()
+     type : 655360
+   -
+     name : ChangePlan
+     procedure_id : 1254896247502871238
+     type_code : 12
+     code : |1+
+      Procédure privee CAssist::ChangePlan(nPlan)
+      // Change le plan en cours dans la fenêtre assistant
+      
+      // contrôle de dépassement
+      si nPlan<1 ou nPlan >20 ALORS
+      	Erreur(<§$0000§>)	
+      sinon
+      	// si on passe au premier plan, le bouton <précédent> est grisé
+      	si nPlan=1 ALORS  
+      		m_BoutonPrécédent..Etat = Grisé
+      	sinon
+      		m_BoutonPrécédent..Etat = Actif
+      	FIN
+      	
+      	// si on passe au dernier plan, le bouton <suivant> devient <terminer>
+      	si nPlan=20 ALORS 
+      		
+      		m_BoutonSuivant..LIbelle=<§$0003§>
+      	ELSE
+      		m_BoutonSuivant..Libellé=<§$0004§>
+      	fin
+      		
+      	// activation du plan
+      	m_FenetreAssociée..plan = nPlan
+      	
+      	// le plan encours devient le nouveau plan
+      	:m_nPlanActif=nPlan
+      fin
+      
+     type : 458752
+   -
+     name : Initialisation
+     internal_properties : CAAAAAgAAADRphRiGJdPkZI1pdWLPbTK1b9mWIxdiZ1Qq802rNkyUOiqKJCLJUNUK2sBay6kI29FnDEnco/lhhKhr84UxwrMhRo8ITkmz1uNcc6VX3nLUGuizjC2HWiFBgtaD6MgTV7eBa8x14834DyHt68HEWdryMZm1mcdGMxWJTvTm41e3Q==
+     procedure_id : 1254896247502936774
+     type_code : 12
+     code : |1-
+      // Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      Procédure virtuelle CAssist::Initialisation()
+      
+      // Initialisation générale (effectuée une seule fois au début)
+      m_ProcédureInitialisation(0)
+      
+      // l'assistant commence sur le plan 1
+      :ChangePlan(1)
+      
+      // Initialisation du premier plan
+      m_ProcédureInitialisation(1)
+      
+      
+      CAS EXCEPTION:
+      	dbgAssertion(Faux,"Vérifier que la procédure locale est disponible"+RC+ExceptionInfo())
+      	:ChangePlan(1)
+     type : 458752
+   -
+     name : OnAnnuler
+     procedure_id : 1254896247503002310
+     type_code : 12
+     code : |1+
+      // Procedure appelée par le bouton "annuler" de l'assistant
+      Procédure virtuelle CAssist::OnAnnuler()
+      
+      // fermeture de l'assistant
+      Ferme()
+      
+     type : 458752
+   -
+     name : OnPrecedent
+     internal_properties : CAAAAAgAAAA5v++zSt9/iZKKpF6+87SdAd5TDQFwVBlNUTPA0WiOFPRp3Y+0JUIpP3JB9pqmLBUMxLTdZ8xkx8qC4BQXPSSXqk1BxOGzv5/RQq22NJhhmpv34MSvw1HioUHDFypBUYSV/WXtgIsI5uERVpZNMKMqaH3P4fZgwG1VCxAL3aajToaTdXRdIcL5dqWoSg4M2GysqA==
+     procedure_id : 1254896247503067846
+     type_code : 12
+     code : |1+
+      // Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      Procédure CAssist::OnPrecedent()
+      // Méthode appelée par le bouton précédent de l'assistant
+      
+      // passe au plan précédent dans le tableau des successions de plans
+      :ChangePlan(:m_tabPlan[:m_nIndPlanPrecedent])
+      
+      // Initialisation du nouveau plan
+      m_ProcédureInitialisation(:m_nPlanActif)
+      
+      // décrémentation de l'indice du plan précédent dans le tableau d'enchainement des plans
+      :m_nIndPlanPrecedent--
+      
+      // contrôle de l'indice
+      if :m_nIndPlanPrecedent<0 ALORS  Erreur(<§$0001§>)
+      
+      
+      CAS EXCEPTION:
+      	dbgAssertion(Faux,"Vérifier que la procédure locale est disponible"+RC+ExceptionInfo())	
+     type : 458752
+   -
+     name : OnSuivant
+     internal_properties : CAAAAAgAAABrCRmE/KEpUx7o+MIcUbwdJRTrFfc+dv95Bwf4a+ruHESbLaeSQ1xnq7AtMigUUPFYqmiRnTLWoS6A9NC9k1QHwpfluJ8p4cE928xfQ2mQE8psL3XmjLgTTJJ64FEKCLUYxuBiE/irW8hWQVuI9dqbuw76pkkVW67olFcMBI/GCwkEwLkopv0O5TIDE7VlBh7+eg==
+     procedure_id : 1254896247503133382
+     type_code : 12
+     code : |1+
+      // Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      Procédure CAssist::OnSuivant()
+      // Méthode appelée par le bouton "suivant" ou "terminer" de l'assistant
+      
+      // contrôle des bornes
+      if (:m_nPlanActif < 1) ou (:m_nPlanActif > 20) ALORS  Erreur(<§$0002§>)
+      
+      // si le contrôle du plan n'est pas valide on reste sur ce plan
+      Si m_ProcédureContrôle(:m_nPlanActif)=faux ALORS  retour
+      
+      // si on est sur le dernier plan
+      si :m_nPlanActif=20 ALORS 
+      	// Action finale
+      	:OnTerminer()
+      sinon
+      	// Actionne le sablier
+      	Sablier(vrai)
+      	// Lance l'action associée au plan encours, si c'est réussi on passe au plan suivant
+      	Si m_ProcédureAction(:m_nPlanActif) ALORS 
+      		// on ajoute un plan précédent dans le tableau d'enchainement des plans
+      		:m_nIndPlanPrecedent++
+          		
+          		// le plan précédent est le plan encours
+      		:m_tabPlan[:m_nIndPlanPrecedent]=:m_nPlanActif
+          		
+          		// On passe sur le plan suivant
+          		:ChangePlan(m_ProcédureSuivant(:m_nPlanActif))
+      		// On appelle la fonction d'initialisation du nouveau plan
+      		m_ProcédureInitialisation(:m_nPlanActif)
+      	fin
+      	// Désactive le sablier
+      	sablier(faux)
+      fin
+      
+      
+      CAS EXCEPTION:
+      	dbgAssertion(Faux,"Vérifier que les procédures locales sont disponibles"+RC+ExceptionInfo())	
+     type : 458752
+   -
+     name : OnTerminer
+     internal_properties : CAAAAAgAAADRphRiGJdPkZI1pdWLPbTK1b9mWIxdiZ1Qq802rNkyUOiqKJCLJUNUK2sBay6kI29FnDEnco/lhhKhr84UxwrMhRo8ITkmz1uNcc6VX3nLUGuizjC2HWiFBgtaD6MgTV7eBa8x14834DyHt68HEWdryMZm1mcdGMxWJTvTm41e3Q==
+     procedure_id : 1254896247503198918
+     type_code : 12
+     code : |1-
+      // Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      Procédure virtuelle CAssist::OnTerminer()
+      
+      // Appel de la procédure de finalisation de la fenêtre
+      m_ProcédureFinalisation()
+      
+      CAS EXCEPTION:
+      	dbgAssertion(Faux,"Vérifier que la procédure locale est disponible"+RC+ExceptionInfo())
+      	
+      	
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+resources :
+ string_res :
+  identifier : 0x3b051d407a11c036
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      fr-FR : Dépassement du nombre maximum de plans
+      en-GB : "CAssist:ChangePlan: Maximum number of planes exceeded"
+     index : 0
+   -
+     text :
+      fr-FR : Indice min du tableau dépassé
+      en-GB : "CAssist:PlanPrecedent: Minimum array subscript exceeded"
+     index : 1
+   -
+     text :
+      fr-FR : Indice de plan hors borne
+      en-GB : "CAssist:Suivant(): Plane subscript out of bound"
+     index : 2
+   -
+     text :
+      fr-FR : "&Terminer"
+      en-GB : "&Done"
+     index : 3
+   -
+     text :
+      fr-FR : "&Suivant >"
+      en-GB : "&Next >"
+     index : 4
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

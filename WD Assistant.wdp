@@ -1,0 +1,97 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Assistant
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : Projet WD Assistant
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : WD Assistant
+    internal_properties : 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
+    configuration_id : 2574630898263385568
+    type : 1
+    generation_name : WD Assistant.exe
+    version :
+     version : VI200027
+     internal_generation_version : 1
+     autoincrement_version : false
+    icon_filename : .\description.ico
+    language : 1
+ elements :
+  identifier : 0x4acc540f0011dae4
+  elements :
+   -
+     name : FEN_Assistant
+     identifier : 0x3e3009bc781c3dfa
+     internal_properties : CAAAAAgAAAAdeXUplsNrdMOSLoqIzeZLl7TiSrgjGyyR27Ou8Ctjlae5sBAH+bqtrJYA+Lgo0MAICA==
+     physical_name : .\FenAssistant.wdw
+     type : 2
+   -
+     name : cAssistant
+     identifier : 0x416a498d00045b0b
+     internal_properties : CAAAAAgAAACKgPKWFVLahUIRqRU7WW/UOAn3H91zmMbYeMIbeMNR79k5OoacbDcoKxWPaSmnU0WPlw==
+     physical_name : .\cAssistant.wdc
+     type : 4
+   -
+     name : TEST_Assistant
+     identifier : 0x49f84343000080e1
+     internal_properties : CAAAAAgAAADoZtDM+6AIE9yve3vZcVE6TgMtnSwa92aKeXtjtXuRR/0RHqJ2Sgl6eaMdmxvVrSPtdQ==
+     physical_name : .\TEST_Assistant.wxt
+     type : 17
+   -
+     name : Modèle_FenAssistant
+     identifier : 0x456329da00003610
+     internal_properties : CAAAAAgAAACLh/OXFFHZgk0QqBAGL/xF1VLoiEhaZwuKnF7DIOUx/znrQo6ZbzQnKhSOaiqmUkaOlg==
+     physical_name : .\Modèle_FenAssistant.wdt
+     type : 18
+  other_elements :
+   -
+     physical_name : .\Description.rtf
+   -
+     physical_name : .\Description.gif
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ report_and_queries_enabled : false
+ common_generation_directory : true
+ languages :
+  - fr-FR
+ code_elements :
+  internal_properties : CAAAAAgAAABuHVz6iOWr7Ovw36g7JiEZ+b83ZPnMmKSF0HD24GAnQCICcplx0Rya0DA+T/bOzUZtKFA9wgIZC9w5mFk7EzlZNcKlGu3ALnSWiOjmY86L8kJVV+x5U7zRVCjzQiB8h2Pi
+  type_code : 0
+  p_codes :
+   -
+     code : |1-
+      
+     type : 196608
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : WD Assistant
+     identifier : 0x4acc540f0017db71
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==
